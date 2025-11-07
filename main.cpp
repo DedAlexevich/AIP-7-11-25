@@ -19,12 +19,9 @@ int* add_col(const int* a, size_t n, size_t m, int filler)
   int* narr = new int[n*(m+1)];
   for (size_t i = 0; i < n; ++i) {
     for (size_t j = 0; j <= m; ++j) {
-      if (j == m) {
-        narr[i*(m+1) + j] = filler;
-        continue;
-      }
       narr[i*(m+1) + j] = a[i*m+j];
     }
+    narr[i*(m+1) + m] = filler;
   }
   return narr;
 }
