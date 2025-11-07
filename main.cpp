@@ -4,19 +4,42 @@ int* resize(const int* a, size_t k, size_t d, int filler);
 void resize2(int** a, size_t k, size_t d, int filler);
 int* add_row(const int* a, size_t n, size_t m, int filler);
 
+void show_matrix(const int* a, size_t n, size_t m)
+{
+  for (size_t i = 0; i < n; ++i) {
+    for (size_t j = 0; j < m; ++j) {
+      std::cout << a[i*m + j] <<'\t';
+    }
+    std::cout << '\n';
+  }
+}
+
+int* add_col(const int* a, size_t n, size_t m, int filler)
+{
+  int* narr = new int[n*(m+1)];
+  for (size_t i = 0; i < n; ++i) {
+    for (size_t j = 0; j <= m; ++j) {
+      if (j == m) {
+        narr[i*(m+1) + j] = filler;
+        continue;
+      }
+      narr[i*(m+1) + j] = a[i*m+j];
+    }
+  }
+  return narr;
+}
+
 int main()
 {
   int* a = new int[10]{1,2,3,4,5,6,7,8,9,10};
   int* b = add_row(a, 2, 5, 12);
+  int* c = add_col(a,2,5,12);
+  show_matrix(b, 3,5);
+  show_matrix(c, 2,6);
 
-  for (size_t i = 0; i < 3; ++i) {
-    for (size_t j = 0; j < 5; ++j) {
-      std::cout << b[i*5 + j] <<'\t';
-    }
-    std::cout << '\n';
-  }
   delete[] a;
   delete[] b;
+  delete[] c;
 }
 
 int* resize(const int* a, size_t k, size_t d, int filler)
