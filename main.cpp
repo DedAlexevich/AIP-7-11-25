@@ -1,17 +1,18 @@
 #include <iostream>
 
 int* resize(const int* a, size_t k, size_t d, int filler);
+void resize2(int** a, size_t k, size_t d, int filler);
 
 int main()
 {
-  int a[] = {1,2,3,4,5};
+  int* a = new int[5]{1,2,3,4,5};
   int k = 10;
-  int* narr(resize(a, 5, k, 11));
+  resize2(&a, 5, k, 11);
 
   for (size_t i = 0; i < k; ++i ) {
-    std::cout << narr[i] << '\n';
+    std::cout << a[i] << '\n';
   }
-  delete[] narr;
+  delete[] a;
 }
 
 int* resize(const int* a, size_t k, size_t d, int filler)
@@ -32,4 +33,11 @@ int* resize(const int* a, size_t k, size_t d, int filler)
     }
   }
   return newArr;
+}
+
+void resize2(int** a, size_t k, size_t d, int filler)
+{
+  int* narr = resize(*a, k, d, filler);
+  delete[] *a;
+  *a = narr;
 }
