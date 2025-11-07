@@ -1,12 +1,12 @@
 #include <iostream>
 
-int* extend(const int* a, size_t k, size_t d, int filler);
+int* resize(const int* a, size_t k, size_t d, int filler);
 
 int main()
 {
   int a[] = {1,2,3,4,5};
-  int k = 3;
-  int* narr = extend(a, 5, k, 11);
+  int k = 10;
+  int* narr(resize(a, 5, k, 11));
 
   for (size_t i = 0; i < k; ++i ) {
     std::cout << narr[i] << '\n';
@@ -14,7 +14,7 @@ int main()
   delete[] narr;
 }
 
-int* extend(const int* a, size_t k, size_t d, int filler)
+int* resize(const int* a, size_t k, size_t d, int filler)
 {
   int* newArr = new int[d];
   if (d > k) {
@@ -31,6 +31,5 @@ int* extend(const int* a, size_t k, size_t d, int filler)
       newArr[i] = a[i];
     }
   }
-
   return newArr;
 }
